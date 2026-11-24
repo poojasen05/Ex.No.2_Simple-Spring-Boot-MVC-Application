@@ -97,21 +97,28 @@ spring-mvc-demo/
 
 ### MvcApplication.java (Main Class):
 
-package com.example.mvc;
+```
+
+package com.example.exp2;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class MvcApplication {
+public class Exp2Application {
+
     public static void main(String[] args) {
-        SpringApplication.run(MvcApplication.class, args);
+        SpringApplication.run(Exp2Application.class, args);
     }
 }
 
+```
+
 ### HomeController.java (Controller):
 
-package com.example.mvc;
+```
+
+package com.example.exp2;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -122,23 +129,100 @@ public class HomeController {
 
     @GetMapping("/")
     public String homePage(Model model) {
-        model.addAttribute("message", "Welcome to Spring Boot MVC!");
-        return "index";  // refers to index.html in templates folder
+
+        model.addAttribute(
+                "message",
+                "Welcome to Spring Boot MVC!"
+        );
+
+        return "index";
     }
 }
+
+```
 ### index.html (View – inside src/main/resources/templates/):
+
+```
 
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <title>Spring MVC</title>
+    <title>Spring Boot MVC</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+            margin-top: 100px;
+            background-color: #f2f2f2;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            margin: auto;
+            width: 60%;
+            border-radius: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+        }
+    </style>
 </head>
+
 <body>
-    <h1 th:text="${message}">Default Message</h1>
+
+<div class="container">
+
+    <h1 th:text="${message}"></h1>
+
+    <p>Welcome to our first MVC app!</p>
+
+    <button onclick="showMessage()">
+        Click for Alert
+    </button>
+
+    <button onclick="changeText()">
+        Change Text
+    </button>
+
+</div>
+
+<script>
+    function showMessage() {
+        alert("Welcome to Spring Boot MVC!");
+    }
+
+    function changeText() {
+        document.querySelector("p").innerHTML =
+            "Text changed successfully!";
+    }
+</script>
+
 </body>
 </html>
 
+```
+
 ### application.properties:
- server.port=8081
+
+```
+
+spring.application.name=exp2
+server.port=8082
+
+```
+
+## Output
+
+<img width="1517" height="712" alt="image" src="https://github.com/user-attachments/assets/4d2f51e2-7fb5-4fe8-a32d-823dbc8bf0c6" />
+
+## Result
+
+The Simple Spring Boot MVC Application was successfully developed and executed. The Controller handled the HTTP request, the Model passed data to the View, and Thymeleaf rendered the dynamic HTML page successfully in the browser. The application displayed the welcome message along with the personalized greeting.
 
 
